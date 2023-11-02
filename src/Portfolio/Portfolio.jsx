@@ -1,158 +1,113 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Card, Button } from "react-bootstrap";
 import './Portfolio.css'
+import FsLightbox from 'fslightbox-react';
+
+import GLightbox from 'glightbox';
+import 'glightbox/dist/css/glightbox.css';
 
 function Portfolio() {
+
+    const images = [
+        {
+          src: 'assets/img/portfolio/portfolio-1.jpg',
+          title: 'Image 1',
+          category: 'Indoor',
+          description: 'Description for Image 1',
+        },
+        {
+          src: 'assets/img/portfolio/portfolio-2.jpg',
+          title: 'Image 2',
+          category: 'Outdoor',
+          description: 'Description for Image 1',
+
+        },
+        {
+          src: 'assets/img/portfolio/portfolio-3.jpg',
+          title: 'Image 3',
+          category: 'Indoor',
+          description: 'Description for Image 1',
+
+        }
+        // Add more image objects with src, title, and category as needed
+      ];
+
+    const [toggler, setToggler] = useState(false);
+    const [productIndex, setProductIndex] = useState(0);
+    const [currentCategory, setCurrentCategory] = useState('All'); // Initial category filter
+
+    const filterImages = (category) => {
+        setCurrentCategory(category);
+    };
+
+    const filteredImages = currentCategory === 'All'
+    ? images
+    : images.filter((image) => image.category === currentCategory);
+    console.log(filteredImages );
+
     return (
         <main id="main">
-            <section class="breadcrumbs">
-                <div class="container">
 
-                    <div class="d-flex justify-content-between align-items-center">
+            <section className="breadcrumbs">
+                <div className="container">
+
+                    <div className="d-flex justify-content-between align-items-center">
                         <h2>Our Portfolio</h2>
                         <ol>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="/Home">Home</a></li>
                             <li>Our Portfolio</li>
                         </ol>
                     </div>
 
                 </div>
             </section>
-            <section class="portfolio">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
+            <section className="portfolio">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
                             <ul id="portfolio-flters">
-                                <li data-filter="*" class="filter-active">All</li>
-                                <li data-filter=".filter-app">App</li>
-                                <li data-filter=".filter-card">Card</li>
-                                <li data-filter=".filter-web">Web</li>
+                                <li onClick={() => filterImages('All')} className="filter-active">All</li>
+                                <li onClick={() => filterImages('Indoor')}>Indoor</li>
+                                <li onClick={() => filterImages('Outdoor')}>Outdoor</li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="row portfolio-container" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+                    <div className="row portfolio-container" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+                    {filteredImages.map((image, index) => (
 
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-app">
-                            <div class="portfolio-item">
-                                <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt=""/>
-                                    <div class="portfolio-info">
-                                        <h3>App 1</h3>
-                                        <div>
-                                            <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                                            <a href="portfolio-details.html" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                                        </div>
+                        <div className="col-lg-4 col-md-6 portfolio-wrap filter-app" >
+                            <div className="portfolio-item">
+                                
+                                <img src={image.src} alt={`Image ${index + 1}`} class="img-fluid" />
+                                <div className="portfolio-info">
+                                    <h3>{image.title}</h3>
+                                    <div>
+                                        <a className="portfolio-lightbox" key={index} onClick={() => setToggler(!toggler)} >
+                                            <i className="bx bx-plus" onClick={() => setProductIndex(index)} ></i>
+                                        </a>
+                                        <a href="" title="Portfolio Details"><i className="bx bx-link"></i></a>
                                     </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-web">
-                            <div class="portfolio-item">
-                                <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt=""/>
-                                    <div class="portfolio-info">
-                                        <h3>Web 3</h3>
-                                        <div>
-                                            <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                            <a href="portfolio-details.html" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                                        </div>
-                                    </div>
-                            </div>
+                        ))}
                         </div>
-
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-app">
-                            <div class="portfolio-item">
-                                <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt=""/>
-                                    <div class="portfolio-info">
-                                        <h3>App 2</h3>
-                                        <div>
-                                            <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                                            <a href="portfolio-details.html" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-card">
-                            <div class="portfolio-item">
-                                <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt=""/>
-                                    <div class="portfolio-info">
-                                        <h3>Card 2</h3>
-                                        <div>
-                                            <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
-                                            <a href="portfolio-details.html" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-web">
-                            <div class="portfolio-item">
-                                <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt=""/>
-                                    <div class="portfolio-info">
-                                        <h3>Web 2</h3>
-                                        <div>
-                                            <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                                            <a href="portfolio-details.html" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-app">
-                            <div class="portfolio-item">
-                                <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt=""/>
-                                    <div class="portfolio-info">
-                                        <h3>App 3</h3>
-                                        <div>
-                                            <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                                            <a href="portfolio-details.html" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-card">
-                            <div class="portfolio-item">
-                                <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt=""/>
-                                    <div class="portfolio-info">
-                                        <h3>Card 1</h3>
-                                        <div>
-                                            <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                                            <a href="portfolio-details.html" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-card">
-                            <div class="portfolio-item">
-                                <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt=""/>
-                                    <div class="portfolio-info">
-                                        <h3>Card 3</h3>
-                                        <div>
-                                            <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                                            <a href="portfolio-details.html" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-web">
-                            <div class="portfolio-item">
-                                <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt=""/>
-                                    <div class="portfolio-info">
-                                        <h3>Web 1</h3>
-                                        <div>
-                                            <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 1"><i class="bx bx-plus"></i></a>
-                                            <a href="portfolio-details.html" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-
+                        <FsLightbox toggler={toggler} 
+                            sources={filteredImages.map((image) => image.src)}  
+                            sourceIndex={productIndex} 
+                            types={['image']}
+                            descriptions={filteredImages.map((image) => image.title)}
+                            customSources={images.map((image) => (
+                                <div className="custom-lightbox-source">
+                                  <img src={image.src} alt={image.title} />
+                                  <div className="custom-description-overlay">
+                                    {image.description}
+                                  </div>
+                                </div>
+                              ))}
+                        />
                     </div>
-
-                </div>
             </section>
         </main>
     );

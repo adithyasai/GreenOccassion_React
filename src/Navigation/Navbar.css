@@ -12,7 +12,7 @@
 }
 
 #header.header-transparent {
-  background: linear-gradient(90deg, #dee0aa9e, #366a51cc);
+  background: none;
 }
 
 #header.header-scrolled {

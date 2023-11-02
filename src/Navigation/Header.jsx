@@ -13,9 +13,17 @@ function Header() {
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
   }
+
+  const [scroll, setScroll] = useState(false);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 100);
+    });
+  }, []);
+
   return (
-    <div>
-      <header id="header" className="fixed-top d-flex align-items-center header-transparent">
+    <div >
+      <header id="header" className={scroll ? "fixed-top d-flex align-items-center header-scrolled" : "fixed-top d-flex align-items-center header-transparent"}  >
         <div className="container d-flex justify-content-between align-items-center">
 
           <div className="logo">

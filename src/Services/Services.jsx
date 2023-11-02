@@ -10,7 +10,19 @@ function Services() {
     return (
         
         <main id="main">
+        <section className="breadcrumbs">
+                <div className="container">
 
+                    <div className="d-flex justify-content-between align-items-center">
+                        <h2>Services</h2>
+                        <ol>
+                            <li><a href="/home">Home</a></li>
+                            <li>Services</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </section>
             <section className="services">
                 <div className="container">
 
@@ -33,7 +45,7 @@ function Services() {
 
                         <div className="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                             <div className="icon-box icon-box-green">
-                                <div className="icon"><i className="bx twemojie-potted-plant"></i></div>
+                                <div className="icon"><i className="bx bx-plant"></i></div>
                                 <h4 className="title"><a href="">Occasion Planting</a></h4>
                                 <p className="description">"We provide a wide variety of plant options suited for different occasions. From vibrant flowering plants for birthdays to elegant succulents for weddings, we've got the perfect green companions for your celebrations."</p>
                             </div>
@@ -71,7 +83,7 @@ function Services() {
 
                 </div>
             </section>
-            {currentPath.includes('services') ? <ServiceDetails /> : null }
+            {/* {currentPath.includes('services') ? <ServiceDetails /> : null } */}
 
         </main>
 

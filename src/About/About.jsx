@@ -1,7 +1,10 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import './About.css'
+import CountUp from 'react-countup';
+
 function About() {
+
     return (
         <main id="main">
             <section className="breadcrumbs">
@@ -10,7 +13,7 @@ function About() {
                     <div className="d-flex justify-content-between align-items-center">
                         <h2>About Us</h2>
                         <ol>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="/home">Home</a></li>
                             <li>About Us</li>
                         </ol>
                     </div>
@@ -54,12 +57,12 @@ function About() {
                     <div className="row counters">
 
                         <div className="col-lg-6 col-6 text-center">
-                            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" className="purecounter"></span>
+                            <CountUp start={0} end={232} duration={1} />
                             <p>Plants Planted</p>
                         </div>
 
                         <div className="col-lg-6 col-6 text-center">
-                            <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" className="purecounter"></span>
+                            <CountUp start={0} end={521} duration={1} />
                             <p>Hours Spent</p>
                         </div>
 

@@ -14,6 +14,8 @@ import About from './About/About';
 import Blog from './Blog/Blog';
 import Services from './Services/Services';
 import Portfolio from './Portfolio/Portfolio';
+import Team from './Team/Team';
+import Contact from './Contact/Contact';
 
 
 function App() {
@@ -28,7 +30,9 @@ function App() {
                 <Route exact path="/about" element={<About />}/>
                 <Route exact path="/services" element={<Services />}/>
                 <Route exact path="/portfolio" element={<Portfolio />}/>
+                <Route exact path="/team" element={<Team />}/>
                 <Route exact path="/blog" element={<Blog />}/>
+                <Route exact path="/contact" element={<Contact />}/>
             </Routes>
             <Footer />
         </Router>
